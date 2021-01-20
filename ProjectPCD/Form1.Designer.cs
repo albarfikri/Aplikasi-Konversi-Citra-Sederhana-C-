@@ -41,8 +41,12 @@ namespace ProjectPCD
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.GrayscaleButton = new System.Windows.Forms.Button();
             this.EdgeButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.SuspendLayout();
             // 
             // OpenButton
@@ -82,6 +86,7 @@ namespace ProjectPCD
             this.BlurButton.TabIndex = 3;
             this.BlurButton.Text = "Blur";
             this.BlurButton.UseVisualStyleBackColor = true;
+            this.BlurButton.Click += new System.EventHandler(this.BlurButton_Click);
             // 
             // label1
             // 
@@ -97,7 +102,7 @@ namespace ProjectPCD
             this.trackBar1.Location = new System.Drawing.Point(95, 480);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(398, 56);
+            this.trackBar1.Size = new System.Drawing.Size(298, 56);
             this.trackBar1.TabIndex = 5;
             this.trackBar1.TickFrequency = 5;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -105,7 +110,7 @@ namespace ProjectPCD
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(506, 488);
+            this.label2.Location = new System.Drawing.Point(395, 485);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(16, 17);
             this.label2.TabIndex = 6;
@@ -132,6 +137,7 @@ namespace ProjectPCD
             this.GrayscaleButton.TabIndex = 8;
             this.GrayscaleButton.Text = "Grayscale";
             this.GrayscaleButton.UseVisualStyleBackColor = true;
+            this.GrayscaleButton.Click += new System.EventHandler(this.GrayscaleButton_Click);
             // 
             // EdgeButton
             // 
@@ -142,11 +148,41 @@ namespace ProjectPCD
             this.EdgeButton.Text = "Edge D";
             this.EdgeButton.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(477, 483);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(33, 17);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Blur";
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(530, 480);
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(191, 56);
+            this.trackBar2.TabIndex = 11;
+            this.trackBar2.Value = 1;
+            this.trackBar2.Scroll += new System.EventHandler(this.updateBlur);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(727, 485);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 17);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(839, 535);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.trackBar2);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.EdgeButton);
             this.Controls.Add(this.GrayscaleButton);
             this.Controls.Add(this.pictureBox1);
@@ -162,6 +198,7 @@ namespace ProjectPCD
             this.Text = "Aplikasi konversi citra sederhana";
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,6 +218,9 @@ namespace ProjectPCD
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button GrayscaleButton;
         private System.Windows.Forms.Button EdgeButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.Label label4;
     }
 }
 

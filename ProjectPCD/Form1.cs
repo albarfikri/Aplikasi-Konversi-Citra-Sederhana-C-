@@ -33,9 +33,10 @@ namespace ProjectPCD
         {
             DialogResult dr = openFileDialog1.ShowDialog();
 
-            if(dr == DialogResult.OK)
+            if (dr == DialogResult.OK)
             {
                 file = Image.FromFile(openFileDialog1.FileName);
+                newBitmap = new Bitmap(openFileDialog1.FileName);
                 pictureBox1.Image = file;
                 opened = true;
             }
@@ -43,37 +44,101 @@ namespace ProjectPCD
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-           
+
             if (opened == true)
             {
                 DialogResult dr = saveFileDialog1.ShowDialog();
                 if (dr == DialogResult.OK)
-            {
-             
-                    if(saveFileDialog1.FileName.Substring(saveFileDialog1.FileName.Length - 3).ToLower() == "bmp")
+                {
+
+                    if (saveFileDialog1.FileName.Substring(saveFileDialog1.FileName.Length - 3).ToLower() == "bmp")
                     {
-                        file.Save(saveFileDialog1.FileName, ImageFormat.Bmp);
+                        newBitmap.Save(saveFileDialog1.FileName, ImageFormat.Bmp);
                     }
                     if (saveFileDialog1.FileName.Substring(saveFileDialog1.FileName.Length - 3).ToLower() == "jpg")
                     {
-                        file.Save(saveFileDialog1.FileName, ImageFormat.Jpeg);
+                        newBitmap.Save(saveFileDialog1.FileName, ImageFormat.Jpeg);
                     }
                     if (saveFileDialog1.FileName.Substring(saveFileDialog1.FileName.Length - 3).ToLower() == "png")
                     {
+                        newBitmap.Save(saveFileDialog1.FileName, ImageFormat.Png);
                         file.Save(saveFileDialog1.FileName, ImageFormat.Png);
                     }
                     if (saveFileDialog1.FileName.Substring(saveFileDialog1.FileName.Length - 3).ToLower() == "tif")
                     {
-                        file.Save(saveFileDialog1.FileName, ImageFormat.Tiff);
+                        newBitmap.Save(saveFileDialog1.FileName, ImageFormat.Tiff);
                     }
                 }
-                
+
             }
             else
             {
                 MessageBox.Show("Gambarnya dibuka dulu yaah !");
             }
 
+        }
+
+        private void GrayscaleButton_Click(object sender, EventArgs e)
+        {
+            //proses mengecek seluruh pixel dari gambar pada sumbu x
+            for (int x = 0; x < newBitmap.Width; x++)
+            {
+                //proses mengecek seluruh pixel dari gambar pada sumbu y
+                for (int y = 0; y < newBitmap.Height; y++)
+                {
+                    //berfungsi mengambil warna asli dari citra
+                    Color asli = newBitmap.GetPixel(x, y);
+
+                    //menkonversi setiap unsur warna dari pixel yaitu rgb
+                    int grayScale = (int)((asli.R * .3) + (asli.G * .59) + (asli.B * .11));
+
+                    Color hasil = Color.FromArgb(grayScale, grayScale, grayScale);
+
+                    newBitmap.SetPixel(x, y, hasil);
+                }
+            }
+            pictureBox1.Image = newBitmap;
+        }
+
+        private void BlurButton_Click(object sender, EventArgs e)
+        {
+            //proses mengecek seluruh pixel dari gambar pada sumbu x
+            for (int x = blurAmount; x <= newBitmap.Width - blurAmount; x++)
+            {
+                //proses mengecek seluruh pixel dari gambar pada sumbu y
+                for (int y = blurAmount; y <= newBitmap.Height - blurAmount; y++)
+                {
+                    //mencoba line sehingga in case ada kesalahan maka program tidak langsung akan berhenti
+                    try
+                    {
+                        Color prevX = newBitmap.GetPixel(x - blurAmount, y);
+                        Color nextX = newBitmap.GetPixel(x + blurAmount, y);
+                        Color prevY = newBitmap.GetPixel(x, y - blurAmount);
+                        Color nextY = newBitmap.GetPixel(x, y + blurAmount);
+
+                        //avg stands for average atau rata rata 
+
+                        int avgR = (int)((prevX.R + nextX.R + prevY.R + nextY.R) / 4);
+                        int avgG = (int)((prevX.G + nextX.G + prevY.G + nextY.G) / 4);
+                        int avgB = (int)((prevX.B + nextX.B + prevY.B + nextY.B) / 4);
+
+
+                        newBitmap.SetPixel(x, y, Color.FromArgb(avgR, avgG, avgB));
+                        
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+                pictureBox1.Image = newBitmap;
+            }
+        }
+
+        private void updateBlur(object sender, EventArgs e)
+        {
+            blurAmount = int.Parse(trackBar2.Value.ToString());
+            label4.Text = trackBar1.Value.ToString();
         }
     }
 }
