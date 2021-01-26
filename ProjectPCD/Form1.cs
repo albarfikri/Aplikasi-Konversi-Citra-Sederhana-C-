@@ -229,6 +229,7 @@ namespace ProjectPCD
             g.Dispose();
             ia.Dispose();
             pictureBox1.Image = bm;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -236,6 +237,12 @@ namespace ProjectPCD
             DialogResult obj = MessageBox.Show("yakin ingin ke tampilan gambar normal ?","Konfirmasi",MessageBoxButtons.YesNo);
             if(obj==DialogResult.Yes)
             {
+                
+
+                file = Image.FromFile(openFileDialog1.FileName);
+                newBitmap = new Bitmap(openFileDialog1.FileName);
+                pictureBox1.Image = file;
+                opened = true;
                 pictureBox1.Image = file;
                 newBitmap = (Bitmap)file;
                 label2.Text = "0";
@@ -312,6 +319,7 @@ namespace ProjectPCD
                 }
             }
             pictureBox1.Image = nB;
+            newBitmap=(Bitmap)nB;
         }
     }
 }
