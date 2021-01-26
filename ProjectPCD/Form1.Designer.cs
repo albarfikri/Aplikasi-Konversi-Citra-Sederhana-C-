@@ -40,7 +40,6 @@ namespace ProjectPCD
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.GrayscaleButton = new System.Windows.Forms.Button();
-            this.EdgeButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
@@ -146,15 +145,6 @@ namespace ProjectPCD
             this.GrayscaleButton.UseVisualStyleBackColor = true;
             this.GrayscaleButton.Click += new System.EventHandler(this.GrayscaleButton_Click);
             // 
-            // EdgeButton
-            // 
-            this.EdgeButton.Location = new System.Drawing.Point(740, 274);
-            this.EdgeButton.Name = "EdgeButton";
-            this.EdgeButton.Size = new System.Drawing.Size(87, 36);
-            this.EdgeButton.TabIndex = 9;
-            this.EdgeButton.Text = "Edge D";
-            this.EdgeButton.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -243,7 +233,6 @@ namespace ProjectPCD
             this.Controls.Add(this.label4);
             this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.EdgeButton);
             this.Controls.Add(this.GrayscaleButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
@@ -278,7 +267,6 @@ namespace ProjectPCD
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button GrayscaleButton;
-        private System.Windows.Forms.Button EdgeButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.Label label4;
