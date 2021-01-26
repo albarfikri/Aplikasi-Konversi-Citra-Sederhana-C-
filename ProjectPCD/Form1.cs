@@ -24,9 +24,50 @@ namespace ProjectPCD
             InitializeComponent();
         }
 
+        //Scrolling Brightness
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             label2.Text = trackBar1.Value.ToString();
+            pictureBox1.Image = AdjustBrightness(newBitmap, trackBar1.Value);
+        
+        }
+
+        //Brightness
+
+        public static Bitmap AdjustBrightness(Bitmap Image, int Value)
+        { //Proses pertama masukan gambar menjadi sebuah bitmap
+            Bitmap TempBitmap = Image;
+
+            //setelah itu nilai dari gambar dibagi dengan nilai maximum dari rgb yaitu 255
+            float FinalValue = (float)Value / 255.0f;
+
+            //Setelah proses selesai masukan kedalam new bitmap
+            Bitmap NewBitmap = new Bitmap(TempBitmap.Width, TempBitmap.Height);
+
+            Graphics NewGraphics = Graphics.FromImage(NewBitmap);
+
+            float[][] FloatColorMatrix = {
+                new float[] {1,0,0,0,0},
+                new float[] {0,1,0,0,0},
+                new float[] {0,0,1,0,0},
+                new float[] {0,0,0,1,0},
+                new float[] {FinalValue, FinalValue, FinalValue, 1, 1}
+
+            };
+            System.Drawing.Imaging.ColorMatrix NewColorMatrix = new ColorMatrix(FloatColorMatrix);
+
+            System.Drawing.Imaging.ImageAttributes Attributes = new ImageAttributes();
+
+            Attributes.SetColorMatrix(NewColorMatrix);
+
+            NewGraphics.DrawImage(TempBitmap, new Rectangle(0, 0, TempBitmap.Width, TempBitmap.Height), 0, 0, TempBitmap.Width, TempBitmap.Height, GraphicsUnit.Pixel, Attributes);
+            
+            Attributes.Dispose();
+
+            NewGraphics.Dispose();
+
+            return NewBitmap;
+
         }
 
         private void OpenButton_Click(object sender, EventArgs e)
@@ -77,6 +118,8 @@ namespace ProjectPCD
             }
 
         }
+
+
 
         private void GrayscaleButton_Click(object sender, EventArgs e)
         {
@@ -131,14 +174,16 @@ namespace ProjectPCD
 
                     }
                 }
-                pictureBox1.Image = newBitmap;
+
             }
+            pictureBox1.Image = newBitmap;
         }
+       
 
         private void updateBlur(object sender, EventArgs e)
         {
             blurAmount = int.Parse(trackBar2.Value.ToString());
-            label4.Text = trackBar1.Value.ToString();
+            
         }
     }
 }
